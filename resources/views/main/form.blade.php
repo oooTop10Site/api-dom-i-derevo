@@ -13,7 +13,8 @@
     <script>
         $(function () {
             // Summernote
-            $('#summernote').summernote()
+            $('#about').summernote()
+            $('#politic').summernote()
 
             // CodeMirror
             CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
@@ -162,7 +163,7 @@
         <div class="card-body row">
             <div class="form-group col-12">
                 <label for="about">Блок "Обращаясь к специалистам компании «Мера Права» вы получите" <strong class="text-danger">*</strong></label>
-                <textarea name="data[about]" class="form-control" id="summernote" placeholder="Введите описание для раздела">{{ old('data.about', !empty($data['about']) ? $data['about'] : '') }}</textarea>
+                <textarea name="data[about]" class="form-control" id="about" placeholder="Введите описание для раздела">{{ old('data.about', !empty($data['about']) ? $data['about'] : '') }}</textarea>
                 @error('data.about')
                 <small class="text-danger mt-2">{{ $message }}</small>
                 @enderror
@@ -171,6 +172,21 @@
                 <label for="rating">Рейтинг <strong class="text-danger">*</strong></label>
                 <input name="data[rating]" type="number" step="0.1" min="0" class="form-control" id="rating" placeholder="Введите рейтинг" value="{{ old('data.rating', !empty($data['rating']) ? $data['rating'] : '') }}">
                 @error('data.rating')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+        </div>
+
+        <div class="card-header">
+            <div>
+                <h3 class="card-title">Контент главной страницы</h3>
+            </div>
+        </div>
+        <div class="card-body row">
+            <div class="form-group col-12">
+                <label for="politic">Блок Политика в отношении обработки персональных данных <strong class="text-danger">*</strong></label>
+                <textarea name="data[politic]" class="form-control" id="politic" placeholder="Введите описание для раздела">{{ old('data.politic', !empty($data['politic']) ? $data['politic'] : '') }}</textarea>
+                @error('data.politic')
                 <small class="text-danger mt-2">{{ $message }}</small>
                 @enderror
             </div>

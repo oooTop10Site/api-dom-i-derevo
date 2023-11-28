@@ -42,6 +42,8 @@ class MainRequest extends FormRequest
 
             'data.about' => ['required', 'string', 'min:1'],
             'data.rating' => ['required', 'string', 'min:1'],
+
+            'data.politic' => ['required', 'string', 'min:1'],
         ];
     }
 }
