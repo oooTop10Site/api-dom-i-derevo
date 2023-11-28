@@ -28,12 +28,20 @@ class MainRequest extends FormRequest
             'data.meta_description' => ['required', 'string', 'min:1'],
             'data.meta_keywords' => ['nullable', 'string', 'min:1'],
 
-            'data.email' => ['nullable', 'email', 'string', 'min:1'],
-            'data.phone' => ['nullable', 'string', 'min:1'],
-            'data.address' => ['nullable', 'string', 'min:1'],
+            'data.email' => ['required', 'email', 'string', 'min:1'],
+            'data.phone' => ['required', 'string', 'min:1'],
+            'data.address' => ['required', 'string', 'min:1'],
+            'data.short_address' => ['required', 'string', 'min:1'],
+            'data.time' => ['required', 'string', 'min:1'],
+            'data.additional_info' => ['nullable', 'string', 'min:1'],
             'data.map' => ['nullable', 'string', 'min:1'],
+            'data.map_link' => ['nullable', 'string', 'min:1'],
+            'data.vk' => ['nullable', 'string', 'min:1'],
+            'data.telegram' => ['nullable', 'string', 'min:1'],
+            'data.whatsapp' => ['nullable', 'string', 'min:1'],
 
             'data.about' => ['required', 'string', 'min:1'],
+            'data.rating' => ['required', 'string', 'min:1'],
         ];
     }
 }

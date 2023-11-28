@@ -2,8 +2,26 @@
 
 @section('title', 'Главная')
 
+@section('links')
+    <link rel="stylesheet" href="{{ asset('/plugins/summernote/summernote-bs4.min.css') }}">
+@endsection
+
 @section('scripts')
+    <script src="{{ asset('/plugins/summernote/summernote-bs4.min.js') }}"></script>
     <script src="{{ asset('/plugins/inputmask/jquery.inputmask.min.js') }}"></script>
+
+    <script>
+        $(function () {
+            // Summernote
+            $('#summernote').summernote()
+
+            // CodeMirror
+            CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+                mode: "htmlmixed",
+                theme: "monokai"
+            });
+        })
+    </script>
 
     <script>
         $('#phone').inputmask('+7 (999) 999-99-99')
@@ -29,23 +47,44 @@
 
         <div class="card-body row">
             <div class="form-group col-12 col-md-6">
-                <label for="email">Адрес электронной почты</label>
+                <label for="email">Адрес электронной почты <strong class="text-danger">*</strong></label>
                 <input name="data[email]" type="email" class="form-control" id="email" placeholder="Введите адрес электронной почты" value="{{ old('data.email', !empty($data['email']) ? $data['email'] : '') }}">
                 @error('data.email')
                 <small class="text-danger mt-2">{{ $message }}</small>
                 @enderror
             </div>
             <div class="form-group col-12 col-md-6">
-                <label for="phone">Номер телефона</label>
+                <label for="phone">Номер телефона <strong class="text-danger">*</strong></label>
                 <input name="data[phone]" type="text" class="form-control" id="phone" placeholder="+7 (___) ___-__-__" value="{{ old('data.phone', !empty($data['phone']) ? $data['phone'] : '') }}">
                 @error('data.phone')
                 <small class="text-danger mt-2">{{ $message }}</small>
                 @enderror
             </div>
             <div class="form-group col-12 col-md-6">
-                <label for="address">Адрес</label>
+                <label for="address">Адрес <strong class="text-danger">*</strong></label>
                 <input name="data[address]" type="text" class="form-control" id="address" placeholder="Введите адрес" value="{{ old('data.address', !empty($data['address']) ? $data['address'] : '') }}">
                 @error('data.address')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <label for="short_address">Сокращенный адрес <strong class="text-danger">*</strong></label>
+                <input name="data[short_address]" type="text" class="form-control" id="short_address" placeholder="Введите сокращенный адрес" value="{{ old('data.short_address', !empty($data['short_address']) ? $data['short_address'] : '') }}">
+                @error('data.short_address')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <label for="time">Время работы <strong class="text-danger">*</strong></label>
+                <textarea name="data[time]" class="form-control" id="time" placeholder="Введите время работы">{{ old('data.time', !empty($data['time']) ? $data['time'] : '') }}</textarea>
+                @error('data.time')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <label for="additional_info">Дополнительная информация</label>
+                <textarea name="data[additional_info]" class="form-control" id="additional_info" placeholder="Введите дополнительную информацию">{{ old('data.additional_info', !empty($data['additional_info']) ? $data['additional_info'] : '') }}</textarea>
+                @error('data.additional_info')
                 <small class="text-danger mt-2">{{ $message }}</small>
                 @enderror
             </div>
@@ -53,6 +92,34 @@
                 <label for="map">Карта</label>
                 <textarea name="data[map]" class="form-control" id="map" placeholder="Вставьте код карты">{{ old('data.map', !empty($data['map']) ? $data['map'] : '') }}</textarea>
                 @error('data.map')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <label for="map_link">Ссылка на карту</label>
+                <input name="data[map_link]" type="text" class="form-control" id="map_link" placeholder="Введите ссылку на карту" value="{{ old('data.map_link', !empty($data['map_link']) ? $data['map_link'] : '') }}">
+                @error('data.map_link')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <label for="vk">Ссылка на группу Вконтакте</label>
+                <input name="data[vk]" type="text" class="form-control" id="vk" placeholder="Введите ссылку на группу Вконтакте" value="{{ old('data.vk', !empty($data['vk']) ? $data['vk'] : '') }}">
+                @error('data.vk')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <label for="telegram">Ссылка на Телеграмм канал</label>
+                <input name="data[telegram]" type="text" class="form-control" id="telegram" placeholder="Введите ссылку на Телеграмм канал" value="{{ old('data.telegram', !empty($data['telegram']) ? $data['telegram'] : '') }}">
+                @error('data.telegram')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <label for="whatsapp">Ссылка на WhatsApp</label>
+                <input name="data[whatsapp]" type="text" class="form-control" id="whatsapp" placeholder="Введите ссылку на WhatsApp" value="{{ old('data.whatsapp', !empty($data['whatsapp']) ? $data['whatsapp'] : '') }}">
+                @error('data.whatsapp')
                 <small class="text-danger mt-2">{{ $message }}</small>
                 @enderror
             </div>
@@ -89,14 +156,21 @@
 
         <div class="card-header">
             <div>
-                <h3 class="card-title">Раздел обо мне</h3>
+                <h3 class="card-title">Контент главной страницы</h3>
             </div>
         </div>
         <div class="card-body row">
-            <div class="form-group col-12 col-md-6">
-                <label for="about">Обо мне <strong class="text-danger">*</strong></label>
-                <textarea name="data[about]" class="form-control" id="about" placeholder="Введите описание для раздела обо мне">{{ old('data.about', !empty($data['about']) ? $data['about'] : '') }}</textarea>
+            <div class="form-group col-12">
+                <label for="about">Блок "Обращаясь к специалистам компании «Мера Права» вы получите" <strong class="text-danger">*</strong></label>
+                <textarea name="data[about]" class="form-control" id="summernote" placeholder="Введите описание для раздела">{{ old('data.about', !empty($data['about']) ? $data['about'] : '') }}</textarea>
                 @error('data.about')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <label for="rating">Рейтинг <strong class="text-danger">*</strong></label>
+                <input name="data[rating]" type="number" step="0.1" min="0" class="form-control" id="rating" placeholder="Введите рейтинг" value="{{ old('data.rating', !empty($data['rating']) ? $data['rating'] : '') }}">
+                @error('data.rating')
                 <small class="text-danger mt-2">{{ $message }}</small>
                 @enderror
             </div>
