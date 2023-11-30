@@ -184,7 +184,7 @@
         </div>
         <div class="card-body row">
             <div class="form-group col-12">
-                <label for="politic">Блок Политика в отношении обработки персональных данных <strong class="text-danger">*</strong></label>
+                <label for="politic">Блок "Политика в отношении обработки персональных данных" <strong class="text-danger">*</strong></label>
                 <textarea name="data[politic]" class="form-control" id="politic" placeholder="Введите описание для раздела">{{ old('data.politic', !empty($data['politic']) ? $data['politic'] : '') }}</textarea>
                 @error('data.politic')
                 <small class="text-danger mt-2">{{ $message }}</small>

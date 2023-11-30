@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Service\Category;
 use Illuminate\Database\Eloquent\Model;
 
 class Review extends Model
@@ -10,12 +11,14 @@ class Review extends Model
 
     protected $fillable = [
         'author',
-        'role',
+        'category_id',
         'text',
-        'reply',
-        'rating',
         'sort_order',
         'status',
         'date_available',
     ];
+
+    public function category() {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
 }

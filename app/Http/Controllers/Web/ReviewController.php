@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Requests\ReviewRequest;
 use App\Models\Review;
+use App\Models\Service\Category;
 
 class ReviewController extends WebController
 {
@@ -11,10 +12,6 @@ class ReviewController extends WebController
         $data = Review::where(function ($query) {
             if (!empty(request('author'))) {
                 $query->where('author', 'LIKE', '%' . request('author') . '%');
-            }
-
-            if (!empty(request('rating'))) {
-                $query->where('rating', request('rating'));
             }
 
             if (!empty(request('date_available'))) {
@@ -29,7 +26,8 @@ class ReviewController extends WebController
     }
 
     public function create() {
-        return view('review.form');
+        $categories = Category::whereNull('category_id')->get();
+        return view('review.form', compact('categories'));
     }
 
     public function store(ReviewRequest $request) {
@@ -38,7 +36,8 @@ class ReviewController extends WebController
     }
 
     public function edit(Review $review) {
-        return view('review.form', compact('review'));
+        $categories = Category::whereNull('category_id')->get();
+        return view('review.form', compact('review', 'categories'));
     }
 
     public function update(ReviewRequest $request, Review $review) {

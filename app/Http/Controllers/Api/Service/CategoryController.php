@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Service;
 
 use App\Http\Controllers\Api\ApiController;
+use App\Models\Review;
 use App\Models\Service\Category;
 use App\Models\Service\Service;
 
@@ -37,6 +38,10 @@ class CategoryController extends ApiController
                     $query->whereHas('relationship_category', function ($_query) use ($category) {
                         $_query->where('category_id', $category->id);
                     });
+                })->orderBy('sort_order', 'ASC')->paginate($this->get_limit()),
+                'reviews' => Review::where(function ($query) use ($category) {
+                    $query->where('status', true);
+                    $query->where('category_id', $category->id);
                 })->orderBy('sort_order', 'ASC')->paginate($this->get_limit()),
             ]);
         }

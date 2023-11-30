@@ -2,6 +2,7 @@
 
 namespace App\Models\Service;
 
+use App\Models\Review;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
@@ -33,5 +34,9 @@ class Category extends Model
 
     public function relationship_service() {
         return $this->hasMany(ServiceToCategory::class, 'category_id');
+    }
+
+    public function reviews() {
+        return $this->hasMany(Review::class, 'category_id');
     }
 }

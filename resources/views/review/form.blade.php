@@ -31,9 +31,14 @@
                 @enderror
             </div>
             <div class="form-group col-12 col-md-6">
-                <label for="role">Должность</label>
-                <input name="role" type="text" class="form-control" id="role" placeholder="Введите должность" value="{{ old('role', !empty($review->role) ? $review->role : '') }}">
-                @error('role')
+                <label for="category_id">Категория <strong class="text-danger">*</strong></label>
+                <select name="category_id" class="form-control" id="category_id">
+                    <option value="">{{ __('main.select.not_select') }}</option>
+                    @foreach($categories as $item)
+                        <option value="{{ $item->id }}"{{ old('category_id', !empty($review->category_id) ? $review->category_id : '') == $item->id ? ' selected' : '' }}>{{ $item->name }}</option>
+                    @endforeach
+                </select>
+                @error('category_id')
                 <small class="text-danger mt-2">{{ $message }}</small>
                 @enderror
             </div>
@@ -41,20 +46,6 @@
                 <label for="text">Текст пользователя <strong class="text-danger">*</strong></label>
                 <textarea name="text" class="form-control" id="text" placeholder="Введите текст пользователя">{{ old('text', !empty($review->text) ? $review->text : '') }}</textarea>
                 @error('text')
-                <small class="text-danger mt-2">{{ $message }}</small>
-                @enderror
-            </div>
-            <div class="form-group col-12 col-md-6">
-                <label for="reply">Ответ администратора</label>
-                <textarea name="reply" class="form-control" id="reply" placeholder="Введите ответ администратора">{{ old('reply', !empty($review->reply) ? $review->reply : '') }}</textarea>
-                @error('reply')
-                <small class="text-danger mt-2">{{ $message }}</small>
-                @enderror
-            </div>
-            <div class="form-group col-12 col-md-6">
-                <label for="rating">Рейтинг <strong class="text-danger">*</strong></label>
-                <input name="rating" min="1" max="5" step="1" type="number" class="form-control" id="rating" placeholder="Введите рейтинг" value="{{ old('rating', !empty($review->rating) ? $review->rating : '') }}">
-                @error('rating')
                 <small class="text-danger mt-2">{{ $message }}</small>
                 @enderror
             </div>

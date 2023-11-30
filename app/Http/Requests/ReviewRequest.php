@@ -24,10 +24,8 @@ class ReviewRequest extends FormRequest
     {
         return [
             'author' => ['required', 'string', 'min:1', 'max:255'],
-            'role' => ['nullable', 'string', 'min:1', 'max:255'],
+            'category_id' => ['required', 'integer', Rule::exists('service_categories', 'id')],
             'text' => ['required', 'string', 'min:1'],
-            'reply' => [Rule::excludeIf(request()->routeIs('api.review.store')), 'nullable', 'string', 'min:1'],
-            'rating' => ['required', 'integer', 'min:1', 'max:5'],
             'sort_order' => [Rule::excludeIf(request()->routeIs('api.review.store')), 'required', 'integer', 'min:0'],
             'status' => [Rule::excludeIf(request()->routeIs('api.review.store')), 'required', 'boolean'],
             'date_available' => [Rule::excludeIf(request()->routeIs('api.review.store')), 'required', 'date'],
