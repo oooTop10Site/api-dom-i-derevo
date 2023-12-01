@@ -12,20 +12,11 @@
 
     <script>
         $(function () {
-            // Summernote
-            $('#about').summernote()
-            $('#politic').summernote()
-
-            // CodeMirror
-            CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
-                mode: "htmlmixed",
-                theme: "monokai"
-            });
+            $('#about').summernote({"height": 300});
+            $('#politic').summernote({"height": 300});
         })
-    </script>
 
-    <script>
-        $('#phone').inputmask('+7 (999) 999-99-99')
+        $('#phone').inputmask('+7 (999) 999-99-99');
     </script>
 @endsection
 

@@ -2,6 +2,20 @@
 
 @section('title', request()->routeIs('*.create') ? 'Добавление категории услуг' : 'Редактирование категории услуг')
 
+@section('links')
+    <link rel="stylesheet" href="{{ asset('/plugins/summernote/summernote-bs4.min.css') }}">
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('/plugins/summernote/summernote-bs4.min.js') }}"></script>
+
+    <script>
+        $(function () {
+            $('#description').summernote({"height": 300});
+        })
+    </script>
+@endsection
+
 @section('content')
     <form class="card card-default" action="{{ request()->routeIs('*.create') ? route('service.category.store', $_GET) : route('service.category.update', array_merge(['category' => $category->id], $_GET)) }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -58,16 +72,16 @@
                 @enderror
             </div>
             <div class="form-group col-12 col-md-6">
-                <label for="description">Описание</label>
-                <textarea name="description" class="form-control" id="description" placeholder="Введите описание">{{ old('description', !empty($category->description) ? $category->description : '') }}</textarea>
-                @error('description')
-                <small class="text-danger mt-2">{{ $message }}</small>
-                @enderror
-            </div>
-            <div class="form-group col-12 col-md-6">
                 <label for="preview">Превью описания</label>
                 <textarea name="preview" class="form-control" id="preview" placeholder="Введите превью описания">{{ old('preview', !empty($category->preview) ? $category->preview : '') }}</textarea>
                 @error('preview')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12">
+                <label for="description">Описание</label>
+                <textarea name="description" class="form-control" id="description" placeholder="Введите описание">{{ old('description', !empty($category->description) ? $category->description : '') }}</textarea>
+                @error('description')
                 <small class="text-danger mt-2">{{ $message }}</small>
                 @enderror
             </div>
