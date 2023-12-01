@@ -9,10 +9,10 @@ use App\Models\Blog\Category;
 class CategoryController extends ApiController
 {
     public function index() {
-        return $this->outputPaginationData(Category::where(function ($query) {
+        return $this->outputData(Category::where(function ($query) {
             $query->where('status', true);
             $query->whereNotNull('seo_keyword');
-        })->orderBy('sort_order', 'ASC')->paginate($this->get_limit()));
+        })->orderBy('sort_order', 'ASC')->paginate($this->get_limit()), false, true);
     }
 
     public function show(string $seo_keyword) {

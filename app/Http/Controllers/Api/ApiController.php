@@ -6,25 +6,16 @@ use App\Http\Controllers\Controller;
 
 class ApiController extends Controller
 {
-    protected function outputData($data = [], $message = false)
+    protected function outputData($data = [], $message = false, $isPaginate = false)
     {
         $data = collect($data);
 
-        if ($data->isNotEmpty() && $data->count() > 0) {
-            return response()->json(['message' => $message ? $message['with_data'] : __('api.message.found'), 'data' => $data], 200);
+        if ((!$isPaginate && $data->isNotEmpty() && $data->count() > 0) || ($isPaginate && !empty($data['data']) && count($data['data']) > 0)) {
+            $message = $message ? $message['with_data'] : __('api.message.found');
         } else {
-            return response()->json(['message' => $message ? $message['without_data'] : __('api.message.not_found'), 'data' => $data], 200);
+            $message = $message ? $message['without_data'] : __('api.message.not_found');
         }
-    }
 
-    protected function outputPaginationData($data = [], $message = false)
-    {
-        $data = collect($data);
-
-        if (!empty($data['data']) && count($data['data']) > 0) {
-            return response()->json(['message' => $message ? $message['with_data'] : __('api.message.found'), 'data' => $data], 200);
-        } else {
-            return response()->json(['message' => $message ? $message['without_data'] : __('api.message.not_found'), 'data' => $data], 200);
-        }
+        return response()->json(['message' => $message, 'data' => $data], 200);
     }
 }

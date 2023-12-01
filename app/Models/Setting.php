@@ -11,6 +11,10 @@ class Setting extends Model
     protected $fillable = [
         'code',
         'value',
+    ];
+
+    protected $hidden = [
+        'id',
         'created_at',
         'updated_at',
     ];

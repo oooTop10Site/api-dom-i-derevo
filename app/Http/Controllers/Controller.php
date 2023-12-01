@@ -10,9 +10,9 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    protected $categories = null;
+    private $categories = null;
 
-    protected function get_parent_recursive($category_id, $ignore_category, $name) {
+    private function get_parent_recursive($category_id, $ignore_category, $name) {
         foreach ($this->categories as $category) {
             if ($category->id === $category_id) {
                 if ($ignore_category === $category->id) {

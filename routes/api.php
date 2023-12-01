@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('main')->controller(\App\Http\Controllers\Api\MainController::class)->group(function () {
-    Route::get('/', 'index');
-    Route::get('/show/{code}', 'show');
+    Route::get('/', 'index')->name('api.main.index');
+    Route::get('/show/{code}', 'show')->name('api.main.show');
 });
 
 Route::prefix('feedback')->controller(\App\Http\Controllers\Api\FeedbackController::class)->group(function () {
@@ -24,29 +24,29 @@ Route::prefix('feedback')->controller(\App\Http\Controllers\Api\FeedbackControll
 });
 
 Route::prefix('review')->controller(\App\Http\Controllers\Api\ReviewController::class)->group(function () {
-    Route::get('/', 'index');
-    Route::get('/show/{review}', 'show');
+    Route::get('/', 'index')->name('api.review.show');
+    Route::get('/show/{review}', 'show')->name('api.review.show');
     Route::post('/store', 'store')->name('api.review.store');
 });
 
 Route::prefix('blog')->group(function () {
     Route::prefix('category')->controller(\App\Http\Controllers\Api\Blog\CategoryController::class)->group(function () {
-        Route::get('/', 'index');
-        Route::get('/show/{seo_keyword}', 'show');
+        Route::get('/', 'index')->name('api.blog.category.index');
+        Route::get('/show/{seo_keyword}', 'show')->name('api.blog.category.show');
     });
 
     Route::prefix('article')->controller(\App\Http\Controllers\Api\Blog\ArticleController::class)->group(function () {
-        Route::get('/show/{seo_keyword}', 'show');
+        Route::get('/show/{seo_keyword}', 'show')->name('api.blog.article.show');
     });
 });
 
 Route::prefix('service')->group(function () {
     Route::prefix('category')->controller(\App\Http\Controllers\Api\Service\CategoryController::class)->group(function () {
-        Route::get('/', 'index');
-        Route::get('/show/{seo_keyword}', 'show');
+        Route::get('/', 'index')->name('api.service.category.index');
+        Route::get('/show/{seo_keyword}', 'show')->name('api.service.category.show');
     });
 
     Route::controller(\App\Http\Controllers\Api\Service\ServiceController::class)->group(function () {
-        Route::get('/show/{seo_keyword}', 'show');
+        Route::get('/show/{seo_keyword}', 'show')->name('api.service.show');
     });
 });
