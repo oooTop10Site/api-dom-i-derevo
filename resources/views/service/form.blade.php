@@ -46,7 +46,7 @@
             </div>
             <div class="form-group col-12 col-md-6">
                 <label for="price">Цена <strong class="text-danger">*</strong></label>
-                <input name="price" type="number" min="0.00" step="0.01" class="form-control" id="price" placeholder="Введите цену" value="{{ old('price', !empty($service->price) ? number_format($service->price, 2) : '0.00') }}">
+                <input name="price" type="number" min="0.00" step="0.01" class="form-control" id="price" placeholder="Введите цену" value="{{ old('price', !empty($service->price) ? number_format($service->price, 2, '.', '') : '0.00') }}">
                 @error('price')
                 <small class="text-danger mt-2">{{ $message }}</small>
                 @enderror
