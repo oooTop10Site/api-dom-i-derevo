@@ -31,6 +31,8 @@ class CategoryController extends ApiController
                     $query->where('status', true);
                     $query->where('category_id', $category->id);
                     // $query->whereNotNull('seo_keyword');
+                })->with('services', function ($query) {
+                    $query->where('status', true);
                 })->orderBy('sort_order', 'ASC')->get(),
                 'services' => Service::where(function ($query) use ($category) {
                     $query->where('status', true);
