@@ -61,7 +61,7 @@ class ServiceController extends WebController
     }
 
     public function edit(Service $service) {
-        $categories = Category::all();
+        $categories = $this->get_parents();
         $examples = Example::all();
         $services = Service::where('id', '!=', $service->id)->get();
         return view('service.form', compact('service', 'categories', 'examples', 'services'));
