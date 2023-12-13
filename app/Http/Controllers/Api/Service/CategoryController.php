@@ -30,11 +30,11 @@ class CategoryController extends ApiController
                 'categories' => Category::where(function ($query) use ($category) {
                     $query->where('status', true);
                     $query->where('category_id', $category->id);
-                    $query->whereNotNull('seo_keyword');
+                    // $query->whereNotNull('seo_keyword');
                 })->orderBy('sort_order', 'ASC')->get(),
                 'services' => Service::where(function ($query) use ($category) {
                     $query->where('status', true);
-                    $query->whereNotNull('seo_keyword');
+                    // $query->whereNotNull('seo_keyword');
                     $query->whereHas('relationship_category', function ($_query) use ($category) {
                         $_query->where('category_id', $category->id);
                     });
