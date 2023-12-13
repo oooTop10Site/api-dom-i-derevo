@@ -18,7 +18,9 @@ class ServiceController extends WebController
             }
 
             if (!empty(request('category'))) {
-                $query->whereHas('categories', request('category'));
+                $query->whereHas('relationship_category', function ($query) {
+                    $query->where('category_id', request('category'));
+                });
             }
 
             if (!empty(request('status')) || request('status') === '0') {
