@@ -22,6 +22,14 @@ class Category extends Model
         'seo_keyword',
     ];
 
+    protected $hidden = [
+        'id',
+        'sort_order',
+        'status',
+        'created_at',
+        'updated_at',
+    ];
+
     public function articles() {
         return $this->hasMany(Article::class, 'category_id');
     }

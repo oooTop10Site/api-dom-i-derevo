@@ -23,6 +23,21 @@ class Service extends Model
         'seo_keyword',
     ];
 
+    protected $hidden = [
+        'id',
+        'description',
+        'image',
+        'meta_title',
+        'meta_h1',
+        'meta_description',
+        'meta_keywords',
+        'seo_keyword',
+        'sort_order',
+        'status',
+        'created_at',
+        'updated_at',
+    ];
+
     public function categories() {
         return $this->belongsToMany(Category::class, 'service_to_category', 'service_id', 'category_id');
     }

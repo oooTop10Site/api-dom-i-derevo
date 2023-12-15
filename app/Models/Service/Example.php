@@ -15,6 +15,12 @@ class Example extends Model
         'status',
     ];
 
+    protected $hidden = [
+        'id',
+        'sort_order',
+        'status',
+    ];
+
     public function services() {
         return $this->belongsToMany(Service::class, 'service_to_example', 'example_id', 'service_id');
     }

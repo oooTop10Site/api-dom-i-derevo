@@ -37,3 +37,13 @@
     </div>
 </div>
 @endif
+
+@if($errors->any())
+    <div class="col-12">
+        <div class="alert alert-warning alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h5><i class="icon fas fa-exclamation-triangle"></i> Внимание!</h5>
+            Проверьте форму на ошибки
+        </div>
+    </div>
+@endif

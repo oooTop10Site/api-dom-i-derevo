@@ -28,10 +28,22 @@ class MainController extends WebController
         $data = [];
         $now = Carbon::now()->toDateTimeString();
         foreach ($validated['data'] as $code => $value) {
-            if (!empty($value)) {
+            if ($code === 'favicon') {
+                continue;
+            } elseif (!empty($value)) {
                 $data[] = ['code' => $code, 'value' => $value, 'created_at' => $now, 'updated_at' => $now];
             }
         }
+
+        if (request()->hasFile('data.favicon')) {
+            $data[] = ['code' => 'favicon', 'value' => request()->file('data.favicon')->store('public/main', ['visibility' => 'public', 'directory_visibility' => 'public']), 'created_at' => $now, 'updated_at' => $now];
+        } else {
+            $favicon = Setting::where('code', 'LIKE', 'favicon')->first();
+            if (!empty($favicon)) {
+                $data[] = ['code' => 'favicon', 'value' => $favicon['value'], 'created_at' => $now, 'updated_at' => $now];
+            }
+        }
+
         DB::delete('DELETE FROM `settings`;');
         Setting::insert($data);
 

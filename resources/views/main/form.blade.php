@@ -14,6 +14,7 @@
         $(function () {
             $('#about').summernote({"height": 300});
             $('#politic').summernote({"height": 300});
+            $('#about_company').summernote({"height": 300});
         })
 
         $('#phone').inputmask('+7 (999) 999-99-99');
@@ -115,6 +116,28 @@
                 <small class="text-danger mt-2">{{ $message }}</small>
                 @enderror
             </div>
+            <div class="form-group col-12 col-md-6">
+                <div class="d-flex justify-content-between">
+                    <img id="preview_image" src="{{ !empty($data['favicon']) ? Storage::url($data['favicon']) : asset('storage/placeholder.webp') }}" class="rounded mr-3" style="width: 70px; height: 70px;" alt="Превью изображения">
+                    <div class="w-100">
+                        <label for="favicon">Фавикон</label>
+                        <div class="custom-file">
+                            <input name="data[favicon]" type="file" class="custom-file-input" accept="{{ __('main.input.file.accept') }}" id="favicon" onchange="changePreviewImage(this)">
+                            <label class="custom-file-label" for="favicon">{{ __('main.input.file.chose') }}</label>
+                        </div>
+                    </div>
+                </div>
+                @error('data.favicon')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12">
+                <label for="politic">Блок "Политика в отношении обработки персональных данных" <strong class="text-danger">*</strong></label>
+                <textarea name="data[politic]" class="form-control" id="politic" placeholder="Введите описание для раздела">{{ old('data.politic', !empty($data['politic']) ? $data['politic'] : '') }}</textarea>
+                @error('data.politic')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
         </div>
 
         <div class="card-header">
@@ -170,14 +193,42 @@
 
         <div class="card-header">
             <div>
-                <h3 class="card-title">Контент главной страницы</h3>
+                <h3 class="card-title">Контент страницы "О компании"</h3>
             </div>
         </div>
         <div class="card-body row">
             <div class="form-group col-12">
-                <label for="politic">Блок "Политика в отношении обработки персональных данных" <strong class="text-danger">*</strong></label>
-                <textarea name="data[politic]" class="form-control" id="politic" placeholder="Введите описание для раздела">{{ old('data.politic', !empty($data['politic']) ? $data['politic'] : '') }}</textarea>
-                @error('data.politic')
+                <label for="about_company">Блок "О компании" <strong class="text-danger">*</strong></label>
+                <textarea name="data[about_company]" class="form-control" id="about_company" placeholder="Введите описание для раздела">{{ old('data.about_company', !empty($data['about_company']) ? $data['about_company'] : '') }}</textarea>
+                @error('data.about_company')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <label for="company_name">Название компании <strong class="text-danger">*</strong></label>
+                <input name="data[company_name]" type="text" class="form-control" id="company_name" placeholder="Введите название компании" value="{{ old('data.company_name', !empty($data['company_name']) ? $data['company_name'] : '') }}">
+                @error('data.company_name')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <label for="ur_company_name">Юридическое название компании <strong class="text-danger">*</strong></label>
+                <input name="data[ur_company_name]" type="text" class="form-control" id="ur_company_name" placeholder="Введите юридическое название компании" value="{{ old('data.ur_company_name', !empty($data['ur_company_name']) ? $data['ur_company_name'] : '') }}">
+                @error('data.ur_company_name')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <label for="inn">ИНН <strong class="text-danger">*</strong></label>
+                <input name="data[inn]" type="text" class="form-control" id="inn" placeholder="Введите ИНН" value="{{ old('data.inn', !empty($data['inn']) ? $data['inn'] : '') }}">
+                @error('data.inn')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <label for="orgn">ОГРН <strong class="text-danger">*</strong></label>
+                <input name="data[orgn]" type="text" class="form-control" id="orgn" placeholder="Введите ОГРН" value="{{ old('data.orgn', !empty($data['orgn']) ? $data['orgn'] : '') }}">
+                @error('data.orgn')
                 <small class="text-danger mt-2">{{ $message }}</small>
                 @enderror
             </div>
