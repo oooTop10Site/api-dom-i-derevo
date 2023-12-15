@@ -19,6 +19,11 @@ Route::prefix('main')->controller(\App\Http\Controllers\Api\MainController::clas
     Route::get('/show/{code}', 'show')->name('api.main.show');
 });
 
+Route::prefix('information')->controller(\App\Http\Controllers\Api\InformationController::class)->group(function () {
+    Route::get('/', 'index')->name('api.information.index');
+    Route::get('/show/{seo_keyword}', 'show')->name('api.information.show');
+});
+
 Route::prefix('feedback')->controller(\App\Http\Controllers\Api\FeedbackController::class)->group(function () {
     Route::post('/store', 'store')->name('api.feedback.store');
 });

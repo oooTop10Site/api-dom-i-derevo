@@ -38,6 +38,7 @@ Route::middleware('auth:web')->group(function () {
     })->name('service');
 
     Route::resource('service', \App\Http\Controllers\Web\Service\ServiceController::class)->except(['show']);
+    Route::resource('information', \App\Http\Controllers\Web\InformationController::class)->except(['show']);
 
     Route::controller(\App\Http\Controllers\Web\MainController::class)->group(function () {
         Route::get('/', 'edit')->name('main.edit');

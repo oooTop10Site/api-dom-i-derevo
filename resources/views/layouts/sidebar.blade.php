@@ -85,6 +85,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('information.index') }}" class="nav-link{{ request()->routeIs('information.*') ? ' active' : '' }}">
+                        <i class="nav-icon fas fa-file-alt"></i>
+                        <p>Информационные страницы</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('user.index') }}" class="nav-link{{ request()->routeIs('user.*') ? ' active' : '' }}">
                         <i class="nav-icon fas fa-user-alt"></i>
                         <p>Пользователи</p>

@@ -39,18 +39,8 @@ class MainRequest extends FormRequest
             'data.vk' => ['nullable', 'string', 'min:1'],
             'data.telegram' => ['nullable', 'string', 'min:1'],
             'data.whatsapp' => ['nullable', 'string', 'min:1'],
-            'data.politic' => ['required', 'string', 'min:1'],
-
-            'data.about' => ['required', 'string', 'min:1'],
-            'data.rating' => ['required', 'string', 'min:1'],
-
-            'data.about_company' => ['required', 'string', 'min:1'],
-            'data.company_name' => ['required', 'string', 'min:1'],
-            'data.ur_company_name' => ['required', 'string', 'min:1'],
-            'data.inn' => ['required', 'string', 'min:1'],
-            'data.orgn' => ['required', 'string', 'min:1'],
-
             'data.favicon' => ['nullable', 'image'],
+            'data.politic' => ['required', 'string', 'min:1'],
         ];
     }
 }
