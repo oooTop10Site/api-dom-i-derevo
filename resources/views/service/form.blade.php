@@ -128,9 +128,16 @@
                 @enderror
             </div>
             <div class="form-group col-12 col-md-6">
-                <label for="additional_info[house][contour]">Теплый контур</label>
-                <input name="additional_info[house][contour]" type="text" class="form-control" id="additional_info[house][contour]" placeholder="Введите значение теплого контура" value="{{ old('additional_info[house][contour]', !empty($service->additional_info->house->contour) ? $service->additional_info->house->contour : '') }}">
-                @error('additional_info[house][contour]')
+                <label for="additional_info[house][equipment]">Комплектация</label>
+                <input name="additional_info[house][equipment]" type="text" class="form-control" id="additional_info[house][equipment]" placeholder="Введите значение комплектации" value="{{ old('additional_info[house][equipment]', !empty($service->additional_info->house->equipment) ? $service->additional_info->house->equipment : '') }}">
+                @error('additional_info[house][equipment]')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <label for="additional_info[house][finishing]">Отделка</label>
+                <input name="additional_info[house][finishing]" type="text" class="form-control" id="additional_info[house][finishing]" placeholder="Введите значение отделки" value="{{ old('additional_info[house][finishing]', !empty($service->additional_info->house->finishing) ? $service->additional_info->house->finishing : '') }}">
+                @error('additional_info[house][finishing]')
                 <small class="text-danger mt-2">{{ $message }}</small>
                 @enderror
             </div>
