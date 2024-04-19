@@ -3,6 +3,7 @@
 namespace App\Models\Service;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Service extends Model
 {
@@ -26,11 +27,20 @@ class Service extends Model
 
     protected $hidden = [
         'id',
+        'image',
         'sort_order',
         'status',
         'created_at',
         'updated_at',
     ];
+
+    protected $appends = [
+        'url_image'
+    ];
+
+    public function getUrlImageAttribute() {
+        return env('APP_URL') . Storage::url($this->image);
+    }
 
     public function categories() {
         return $this->belongsToMany(Category::class, 'service_to_category', 'service_id', 'category_id');

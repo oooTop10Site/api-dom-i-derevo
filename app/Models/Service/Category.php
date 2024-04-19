@@ -4,6 +4,7 @@ namespace App\Models\Service;
 
 use App\Models\Review;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Category extends Model
 {
@@ -26,12 +27,21 @@ class Category extends Model
 
     protected $hidden = [
         'id',
+        'image',
         'category_id',
         'sort_order',
         'status',
         'created_at',
         'updated_at',
     ];
+
+    protected $appends = [
+        'url_image'
+    ];
+
+    public function getUrlImageAttribute() {
+        return env('APP_URL') . Storage::url($this->image);
+    }
 
     public function categories() {
         return $this->hasMany(Category::class, 'category_id');
