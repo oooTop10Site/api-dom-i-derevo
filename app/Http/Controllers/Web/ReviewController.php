@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Requests\ReviewRequest;
 use App\Models\Review;
-use App\Models\Service\Category;
 
 class ReviewController extends WebController
 {
@@ -26,8 +25,7 @@ class ReviewController extends WebController
     }
 
     public function create() {
-        $categories = Category::whereNull('category_id')->get();
-        return view('review.form', compact('categories'));
+        return view('review.form');
     }
 
     public function store(ReviewRequest $request) {
@@ -36,8 +34,7 @@ class ReviewController extends WebController
     }
 
     public function edit(Review $review) {
-        $categories = Category::whereNull('category_id')->get();
-        return view('review.form', compact('review', 'categories'));
+        return view('review.form', compact('review'));
     }
 
     public function update(ReviewRequest $request, Review $review) {

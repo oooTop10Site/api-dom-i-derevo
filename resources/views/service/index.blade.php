@@ -23,7 +23,6 @@
                         <tr>
                             <th><a href="{{ route('service.index', array_merge($_GET, ['sort' => 'id', 'order' => (request('order', 'DESC') === 'DESC' ? 'ASC' : 'DESC')])) }}">ID{!! request('sort') === 'id' ? (request('order', 'DESC') === 'DESC' ? __('main.sort.numbers.desc') : __('main.sort.numbers.asc')) : '' !!}</a></th>
                             <th><a href="{{ route('service.index', array_merge($_GET, ['sort' => 'name', 'order' => (request('order', 'DESC') === 'DESC' ? 'ASC' : 'DESC')])) }}">Название{!! request('sort') === 'name' ? (request('order', 'DESC') === 'DESC' ? __('main.sort.chars.desc') : __('main.sort.chars.asc')) : '' !!}</a></th>
-                            <th><a href="{{ route('service.index', array_merge($_GET, ['sort' => 'price', 'order' => (request('order', 'DESC') === 'DESC' ? 'ASC' : 'DESC')])) }}">Цена{!! request('sort') === 'price' ? (request('order', 'DESC') === 'DESC' ? __('main.sort.numbers.desc') : __('main.sort.numbers.asc')) : '' !!}</a></th>
                             <th><a href="{{ route('service.index', array_merge($_GET, ['sort' => 'sort_order', 'order' => (request('order', 'DESC') === 'DESC' ? 'ASC' : 'DESC')])) }}">Порядок сортировки{!! request('sort') === 'sort_order' ? (request('order', 'DESC') === 'DESC' ? __('main.sort.numbers.desc') : __('main.sort.numbers.asc')) : '' !!}</a></th>
                             <th><a href="{{ route('service.index', array_merge($_GET, ['sort' => 'status', 'order' => (request('order', 'DESC') === 'DESC' ? 'ASC' : 'DESC')])) }}">Статус{!! request('sort') === 'status' ? (request('order', 'DESC') === 'DESC' ? __('main.sort.chars.asc') : __('main.sort.chars.desc')) : '' !!}</a></th>
                             <th class="text-right">{{ __('main.table.actions') }}</th>
@@ -35,7 +34,6 @@
                                 <tr>
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->name }}</td>
-                                    <td>{{ number_format($item->price, 2) }} ₽</td>
                                     <td>{{ $item->sort_order }}</td>
                                     <td>{{ $item->status ? __('main.select.status.true') : __('main.select.status.false') }}</td>
                                     <td class="d-flex justify-content-end">

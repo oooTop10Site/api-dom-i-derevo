@@ -47,9 +47,16 @@
                 @enderror
             </div>
             <div class="form-group col-12 col-md-6">
-                <label for="phone">Номер телефона <strong class="text-danger">*</strong></label>
-                <input name="data[phone]" type="text" class="form-control" id="phone" placeholder="+7 (___) ___-__-__" value="{{ old('data.phone', !empty($data['phone']) ? $data['phone'] : '') }}">
-                @error('data.phone')
+                <label for="phone_1">Номер телефона 1 <strong class="text-danger">*</strong></label>
+                <input name="data[phone_1]" type="text" class="form-control" id="phone_1" placeholder="+7 (___) ___-__-__" value="{{ old('data.phone_1', !empty($data['phone_1']) ? $data['phone_1'] : '') }}">
+                @error('data.phone_1')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <label for="phone_2">Номер телефона 2 <strong class="text-danger">*</strong></label>
+                <input name="data[phone_2]" type="text" class="form-control" id="phone_2" placeholder="+7 (___) ___-__-__" value="{{ old('data.phone_2', !empty($data['phone_2']) ? $data['phone_2'] : '') }}">
+                @error('data.phone_2')
                 <small class="text-danger mt-2">{{ $message }}</small>
                 @enderror
             </div>
@@ -68,20 +75,6 @@
                 @enderror
             </div>
             <div class="form-group col-12 col-md-6">
-                <label for="time">Время работы <strong class="text-danger">*</strong></label>
-                <textarea name="data[time]" class="form-control" id="time" placeholder="Введите время работы">{{ old('data.time', !empty($data['time']) ? $data['time'] : '') }}</textarea>
-                @error('data.time')
-                <small class="text-danger mt-2">{{ $message }}</small>
-                @enderror
-            </div>
-            <div class="form-group col-12 col-md-6">
-                <label for="additional_info">Дополнительная информация</label>
-                <textarea name="data[additional_info]" class="form-control" id="additional_info" placeholder="Введите дополнительную информацию">{{ old('data.additional_info', !empty($data['additional_info']) ? $data['additional_info'] : '') }}</textarea>
-                @error('data.additional_info')
-                <small class="text-danger mt-2">{{ $message }}</small>
-                @enderror
-            </div>
-            <div class="form-group col-12 col-md-6">
                 <label for="map">Карта</label>
                 <textarea name="data[map]" class="form-control" id="map" placeholder="Вставьте код карты">{{ old('data.map', !empty($data['map']) ? $data['map'] : '') }}</textarea>
                 @error('data.map')
@@ -92,27 +85,6 @@
                 <label for="map_link">Ссылка на карту</label>
                 <input name="data[map_link]" type="text" class="form-control" id="map_link" placeholder="Введите ссылку на карту" value="{{ old('data.map_link', !empty($data['map_link']) ? $data['map_link'] : '') }}">
                 @error('data.map_link')
-                <small class="text-danger mt-2">{{ $message }}</small>
-                @enderror
-            </div>
-            <div class="form-group col-12 col-md-6">
-                <label for="vk">Ссылка на группу Вконтакте</label>
-                <input name="data[vk]" type="text" class="form-control" id="vk" placeholder="Введите ссылку на группу Вконтакте" value="{{ old('data.vk', !empty($data['vk']) ? $data['vk'] : '') }}">
-                @error('data.vk')
-                <small class="text-danger mt-2">{{ $message }}</small>
-                @enderror
-            </div>
-            <div class="form-group col-12 col-md-6">
-                <label for="telegram">Ссылка на Телеграмм канал</label>
-                <input name="data[telegram]" type="text" class="form-control" id="telegram" placeholder="Введите ссылку на Телеграмм канал" value="{{ old('data.telegram', !empty($data['telegram']) ? $data['telegram'] : '') }}">
-                @error('data.telegram')
-                <small class="text-danger mt-2">{{ $message }}</small>
-                @enderror
-            </div>
-            <div class="form-group col-12 col-md-6">
-                <label for="whatsapp">Ссылка на WhatsApp</label>
-                <input name="data[whatsapp]" type="text" class="form-control" id="whatsapp" placeholder="Введите ссылку на WhatsApp" value="{{ old('data.whatsapp', !empty($data['whatsapp']) ? $data['whatsapp'] : '') }}">
-                @error('data.whatsapp')
                 <small class="text-danger mt-2">{{ $message }}</small>
                 @enderror
             </div>

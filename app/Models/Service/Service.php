@@ -13,6 +13,7 @@ class Service extends Model
         'price',
         'description',
         'preview',
+        'additional_info',
         'image',
         'sort_order',
         'status',
@@ -25,13 +26,6 @@ class Service extends Model
 
     protected $hidden = [
         'id',
-        'description',
-        'image',
-        'meta_title',
-        'meta_h1',
-        'meta_description',
-        'meta_keywords',
-        'seo_keyword',
         'sort_order',
         'status',
         'created_at',
@@ -50,16 +44,8 @@ class Service extends Model
         return $this->belongsToMany(Service::class, 'service_to_service', 'additional_service_id', 'service_id');
     }
 
-    public function examples() {
-        return $this->belongsToMany(Example::class, 'service_to_example', 'service_id', 'example_id');
-    }
-
     public function relationship_category() {
         return $this->hasMany(ServiceToCategory::class, 'service_id');
-    }
-
-    public function relationship_example() {
-        return $this->hasMany(ServiceToExample::class, 'service_id');
     }
 
     public function relationship_service() {

@@ -11,7 +11,6 @@ class Review extends Model
 
     protected $fillable = [
         'author',
-        'category_id',
         'text',
         'sort_order',
         'status',
@@ -20,7 +19,6 @@ class Review extends Model
 
     protected $hidden = [
         'id',
-        'category_id',
         'sort_order',
         'status',
         'created_at',

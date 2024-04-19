@@ -8,17 +8,11 @@ use App\Models\Review;
 class ReviewController extends ApiController
 {
     public function index() {
-        return $this->outputData(Review::where('status', true)->withWhereHas('category', function ($query) {
-            $query->where('status', true);
-            $query->whereNotNull('seo_keyword');
-        })->orderBy('sort_order', 'ASC')->paginate($this->get_limit()), false, true);
+        return $this->outputData(Review::where('status', true)->orderBy('sort_order', 'ASC')->paginate($this->get_limit()), false, true);
     }
 
     public function show(Review $review) {
-        return $review->status ? $this->outputData($review->withWhereHas('category', function ($query) {
-            $query->where('status', true);
-            $query->whereNotNull('seo_keyword');
-        })->first()) : abort(404, __('api.message.not_found'));
+        return $review->status ? $this->outputData($review->first()) : abort(404, __('api.message.not_found'));
     }
 
     public function store(ReviewRequest $request) {

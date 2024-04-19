@@ -29,16 +29,12 @@ class MainRequest extends FormRequest
             'data.meta_keywords' => ['nullable', 'string', 'min:1'],
 
             'data.email' => ['required', 'email', 'string', 'min:1'],
-            'data.phone' => ['required', 'string', 'min:1'],
+            'data.phone_1' => ['required', 'string', 'min:1'],
+            'data.phone_2' => ['required', 'string', 'min:1'],
             'data.address' => ['required', 'string', 'min:1'],
             'data.short_address' => ['required', 'string', 'min:1'],
-            'data.time' => ['required', 'string', 'min:1'],
-            'data.additional_info' => ['nullable', 'string', 'min:1'],
             'data.map' => ['nullable', 'string', 'min:1'],
             'data.map_link' => ['nullable', 'string', 'min:1'],
-            'data.vk' => ['nullable', 'string', 'min:1'],
-            'data.telegram' => ['nullable', 'string', 'min:1'],
-            'data.whatsapp' => ['nullable', 'string', 'min:1'],
             'data.favicon' => ['nullable', 'image'],
             'data.politic' => ['required', 'string', 'min:1'],
         ];

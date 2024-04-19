@@ -31,18 +31,6 @@
                 @enderror
             </div>
             <div class="form-group col-12 col-md-6">
-                <label for="category_id">Категория <strong class="text-danger">*</strong></label>
-                <select name="category_id" class="form-control" id="category_id">
-                    <option value="">{{ __('main.select.not_select') }}</option>
-                    @foreach($categories as $item)
-                        <option value="{{ $item->id }}"{{ old('category_id', !empty($review->category_id) ? $review->category_id : '') == $item->id ? ' selected' : '' }}>{{ $item->name }}</option>
-                    @endforeach
-                </select>
-                @error('category_id')
-                <small class="text-danger mt-2">{{ $message }}</small>
-                @enderror
-            </div>
-            <div class="form-group col-12 col-md-6">
                 <label for="text">Текст пользователя <strong class="text-danger">*</strong></label>
                 <textarea name="text" class="form-control" id="text" placeholder="Введите текст пользователя">{{ old('text', !empty($review->text) ? $review->text : '') }}</textarea>
                 @error('text')

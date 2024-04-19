@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Web\Service;
 
 use App\Http\Controllers\Web\WebController;
 use App\Http\Requests\Service\ServiceRequest;
-use App\Models\Service\Category;
-use App\Models\Service\Example;
 use App\Models\Service\Service;
 use Illuminate\Support\Facades\Storage;
 
@@ -36,9 +34,8 @@ class ServiceController extends WebController
     public function create() {
         $categories = $this->get_parents();
 
-        $examples = Example::all();
         $services = Service::all();
-        return view('service.form', compact('categories', 'examples', 'services'));
+        return view('service.form', compact('categories', 'services'));
     }
 
     public function store(ServiceRequest $request) {
@@ -48,12 +45,14 @@ class ServiceController extends WebController
             $validated['image'] = request()->file('image')->store('public/service', ['visibility' => 'public', 'directory_visibility' => 'public']);
         }
 
+        $validated['price'] = json_encode($validated['price']);
+        if (!empty(request('additional_info'))) {
+            $validated['additional_info'] = json_encode($validated['additional_info']);
+        }
+
         $service = Service::create($validated);
         if (!empty($validated['categories']) && count($validated['categories']) > 0) {
             $service->relationship_category()->createMany($validated['categories']);
-        }
-        if (!empty($validated['examples']) && count($validated['examples']) > 0) {
-            $service->relationship_example()->createMany($validated['examples']);
         }
         if (!empty($validated['services']) && count($validated['services']) > 0) {
             $service->relationship_service()->createMany($validated['services']);
@@ -64,9 +63,12 @@ class ServiceController extends WebController
 
     public function edit(Service $service) {
         $categories = $this->get_parents();
-        $examples = Example::all();
         $services = Service::where('id', '!=', $service->id)->get();
-        return view('service.form', compact('service', 'categories', 'examples', 'services'));
+
+        $service->price = json_decode($service->price);
+        $service->additional_info = json_decode($service->additional_info);
+
+        return view('service.form', compact('service', 'categories', 'services'));
     }
 
     public function update(ServiceRequest $request, Service $service) {
@@ -80,14 +82,15 @@ class ServiceController extends WebController
             $validated['image'] = request()->file('image')->store('public/service', ['visibility' => 'public', 'directory_visibility' => 'public']);
         }
 
+        $validated['price'] = json_encode($validated['price']);
+        if (!empty(request('additional_info'))) {
+            $validated['additional_info'] = json_encode($validated['additional_info']);
+        }
+
         $service->update($validated);
         if (!empty($validated['categories']) && count($validated['categories']) > 0) {
             $service->relationship_category()->delete();
             $service->relationship_category()->createMany($validated['categories']);
-        }
-        if (!empty($validated['examples']) && count($validated['examples']) > 0) {
-            $service->relationship_example()->delete();
-            $service->relationship_example()->createMany($validated['examples']);
         }
         if (!empty($validated['services']) && count($validated['services']) > 0) {
             $service->relationship_service()->delete();
@@ -103,7 +106,6 @@ class ServiceController extends WebController
         }
 
         $service->relationship_category()->delete();
-        $service->relationship_example()->delete();
         $service->relationship_service()->delete();
         $service->delete();
 

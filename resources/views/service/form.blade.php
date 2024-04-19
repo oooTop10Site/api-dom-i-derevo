@@ -45,9 +45,23 @@
                 @enderror
             </div>
             <div class="form-group col-12 col-md-6">
-                <label for="price">Цена <strong class="text-danger">*</strong></label>
-                <input name="price" type="number" min="0.00" step="0.01" class="form-control" id="price" placeholder="Введите цену" value="{{ old('price', !empty($service->price) ? number_format($service->price, 2, '.', '') : '0.00') }}">
-                @error('price')
+                <label for="price[full]">Цена <strong class="text-danger">*</strong></label>
+                <input name="price[full]" type="number" min="0.00" step="0.01" class="form-control" id="price[full]" placeholder="Введите цену" value="{{ old('price[full]', !empty($service->price->full) ? number_format($service->price->full, 2, '.', '') : '0.00') }}">
+                @error('price[full]')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <label for="price[meter]">Цена за метр<sup>2</sup></label>
+                <input name="price[meter]" type="number" min="0.00" step="0.01" class="form-control" id="price[meter]" placeholder="Введите цену за квадратный метр" value="{{ old('price[meter]', !empty($service->price->meter) ? number_format($service->price->meter, 2, '.', '') : '0.00') }}">
+                @error('price[meter]')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <label for="price[mortgage]">Цена в месяц в ипотеку</label>
+                <input name="price[mortgage]" type="number" min="0.00" step="0.01" class="form-control" id="price[mortgage]" placeholder="Введите цену в месяц в ипотеку" value="{{ old('price[mortgage]', !empty($service->price->mortgage) ? number_format($service->price->mortgage, 2, '.', '') : '0.00') }}">
+                @error('price[mortgage]')
                 <small class="text-danger mt-2">{{ $message }}</small>
                 @enderror
             </div>
@@ -101,6 +115,207 @@
 
         <div class="card-header">
             <div>
+                <h3 class="card-title">О доме</h3>
+            </div>
+        </div>
+
+        <div class="card-body row">
+            <div class="form-group col-12 col-md-6">
+                <label for="additional_info[house][square]">Площадь дома</label>
+                <input name="additional_info[house][square]" type="text" class="form-control" id="additional_info[house][square]" placeholder="Введите площадь дома" value="{{ old('additional_info[house][square]', !empty($service->additional_info->house->square) ? $service->additional_info->house->square : '') }}">
+                @error('additional_info[house][square]')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <label for="additional_info[house][contour]">Теплый контур</label>
+                <input name="additional_info[house][contour]" type="text" class="form-control" id="additional_info[house][contour]" placeholder="Введите значение теплого контура" value="{{ old('additional_info[house][contour]', !empty($service->additional_info->house->contour) ? $service->additional_info->house->contour : '') }}">
+                @error('additional_info[house][contour]')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <label for="additional_info[house][repair]">Ремонт</label>
+                <input name="additional_info[house][repair]" type="text" class="form-control" id="additional_info[house][repair]" placeholder="Введите значение ремонта" value="{{ old('additional_info[house][repair]', !empty($service->additional_info->house->repair) ? $service->additional_info->house->repair : '') }}">
+                @error('additional_info[house][repair]')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <label for="additional_info[house][rooms]">Количество комнат</label>
+                <input name="additional_info[house][rooms]" type="text" class="form-control" id="additional_info[house][rooms]" placeholder="Введите количество комнат" value="{{ old('additional_info[house][rooms]', !empty($service->additional_info->house->rooms) ? $service->additional_info->house->rooms : '') }}">
+                @error('additional_info[house][rooms]')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <label for="additional_info[house][floors]">Этажей в доме</label>
+                <input name="additional_info[house][floors]" type="text" class="form-control" id="additional_info[house][floors]" placeholder="Введите количество этажей в доме" value="{{ old('additional_info[house][floors]', !empty($service->additional_info->house->floors) ? $service->additional_info->house->floors : '') }}">
+                @error('additional_info[house][floors]')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <label for="additional_info[house][material]">Материал стен</label>
+                <input name="additional_info[house][material]" type="text" class="form-control" id="additional_info[house][material]" placeholder="Введите материал стен" value="{{ old('additional_info[house][material]', !empty($service->additional_info->house->material) ? $service->additional_info->house->material : '') }}">
+                @error('additional_info[house][material]')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <label for="additional_info[house][bathroom]">Санузел</label>
+                <input name="additional_info[house][bathroom]" type="text" class="form-control" id="additional_info[house][bathroom]" placeholder="Введите значение санузла" value="{{ old('additional_info[house][bathroom]', !empty($service->additional_info->house->bathroom) ? $service->additional_info->house->bathroom : '') }}">
+                @error('additional_info[house][bathroom]')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <label for="additional_info[house][year]">Год постройки</label>
+                <input name="additional_info[house][year]" type="text" class="form-control" id="additional_info[house][year]" placeholder="Введите год постройки" value="{{ old('additional_info[house][year]', !empty($service->additional_info->house->year) ? $service->additional_info->house->year : '') }}">
+                @error('additional_info[house][year]')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+        </div>
+
+        <div class="card-header">
+            <div>
+                <h3 class="card-title">Об участке</h3>
+            </div>
+        </div>
+
+        <div class="card-body row">
+            <div class="form-group col-12 col-md-6">
+                <label for="additional_info[site][square]">Площадь участка</label>
+                <input name="additional_info[site][square]" type="text" class="form-control" id="additional_info[site][square]" placeholder="Введите площадь участка" value="{{ old('additional_info[site][square]', !empty($service->additional_info->site->square) ? $service->additional_info->site->square : '') }}">
+                @error('additional_info[site][square]')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <label for="additional_info[site][category]">Категория земель</label>
+                <input name="additional_info[site][category]" type="text" class="form-control" id="additional_info[site][category]" placeholder="Введите категорию земли" value="{{ old('additional_info[site][category]', !empty($service->additional_info->site->category) ? $service->additional_info->site->category : '') }}">
+                @error('additional_info[site][category]')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+        </div>
+
+        <div class="card-header">
+            <div>
+                <h3 class="card-title">Коммуникации и удобства</h3>
+            </div>
+        </div>
+
+        <div class="card-body row">
+            <div class="form-group col-12 col-md-6">
+                <label for="additional_info[communication][electricity]">Электричество</label>
+                <select name="additional_info[communication][electricity]" class="form-control" id="additional_info[communication][electricity]">
+                    <option value="0"{{ !old('additional_info[communication][electricity]', !empty($service->additional_info->communication->electricity) ? $service->additional_info->communication->electricity : '') ? ' selected' : '' }}>{{ __('main.select.status.false') }}</option>
+                    <option value="1"{{ old('additional_info[communication][electricity]', !empty($service->additional_info->communication->electricity) ? $service->additional_info->communication->electricity : '') ? ' selected' : '' }}>{{ __('main.select.status.true') }}</option>
+                </select>
+                @error('additional_info[communication][electricity]')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <label for="additional_info[communication][heating]">Отопление</label>
+                <select name="additional_info[communication][heating]" class="form-control" id="additional_info[communication][heating]">
+                    <option value="0"{{ !old('additional_info[communication][heating]', !empty($service->additional_info->communication->heating) ? $service->additional_info->communication->heating : '') ? ' selected' : '' }}>{{ __('main.select.status.false') }}</option>
+                    <option value="1"{{ old('additional_info[communication][heating]', !empty($service->additional_info->communication->heating) ? $service->additional_info->communication->heating : '') ? ' selected' : '' }}>{{ __('main.select.status.true') }}</option>
+                </select>
+                @error('additional_info[communication][heating]')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <label for="additional_info[communication][sewerage]">Канализация</label>
+                <select name="additional_info[communication][sewerage]" class="form-control" id="additional_info[communication][sewerage]">
+                    <option value="0"{{ !old('additional_info[communication][sewerage]', !empty($service->additional_info->communication->sewerage) ? $service->additional_info->communication->sewerage : '') ? ' selected' : '' }}>{{ __('main.select.status.false') }}</option>
+                    <option value="1"{{ old('additional_info[communication][sewerage]', !empty($service->additional_info->communication->sewerage) ? $service->additional_info->communication->sewerage : '') ? ' selected' : '' }}>{{ __('main.select.status.true') }}</option>
+                </select>
+                @error('additional_info[communication][sewerage]')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <label for="additional_info[communication][water]">Водоснабжение</label>
+                <select name="additional_info[communication][water]" class="form-control" id="additional_info[communication][water]">
+                    <option value="0"{{ !old('additional_info[communication][water]', !empty($service->additional_info->communication->water) ? $service->additional_info->communication->water : '') ? ' selected' : '' }}>{{ __('main.select.status.false') }}</option>
+                    <option value="1"{{ old('additional_info[communication][water]', !empty($service->additional_info->communication->water) ? $service->additional_info->communication->water : '') ? ' selected' : '' }}>{{ __('main.select.status.true') }}</option>
+                </select>
+                @error('additional_info[communication][water]')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <label for="additional_info[communication][gas]">Газ</label>
+                <select name="additional_info[communication][gas]" class="form-control" id="additional_info[communication][gas]">
+                    <option value="0"{{ !old('additional_info[communication][gas]', !empty($service->additional_info->communication->gas) ? $service->additional_info->communication->gas : '') ? ' selected' : '' }}>{{ __('main.select.status.false') }}</option>
+                    <option value="1"{{ old('additional_info[communication][gas]', !empty($service->additional_info->communication->gas) ? $service->additional_info->communication->gas : '') ? ' selected' : '' }}>{{ __('main.select.status.true') }}</option>
+                </select>
+                @error('additional_info[communication][gas]')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <label for="additional_info[communication][terrace]">Терраса</label>
+                <select name="additional_info[communication][terrace]" class="form-control" id="additional_info[communication][terrace]">
+                    <option value="0"{{ !old('additional_info[communication][terrace]', !empty($service->additional_info->communication->terrace) ? $service->additional_info->communication->terrace : '') ? ' selected' : '' }}>{{ __('main.select.status.false') }}</option>
+                    <option value="1"{{ old('additional_info[communication][terrace]', !empty($service->additional_info->communication->terrace) ? $service->additional_info->communication->terrace : '') ? ' selected' : '' }}>{{ __('main.select.status.true') }}</option>
+                </select>
+                @error('additional_info[communication][terrace]')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+        </div>
+
+        <div class="card-header">
+            <div>
+                <h3 class="card-title">Расположение</h3>
+            </div>
+        </div>
+
+        <div class="card-body row">
+            <div class="form-group col-12 col-md-6">
+                <label for="additional_info[location][address]">Адрес участка</label>
+                <input name="additional_info[location][address]" type="text" class="form-control" id="additional_info[location][address]" placeholder="Введите адрес участка" value="{{ old('additional_info[location][address]', !empty($service->additional_info->location->address) ? $service->additional_info->location->address : '') }}">
+                @error('additional_info[location][address]')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <label for="additional_info[location][map]">Код карты</label>
+                <textarea name="additional_info[location][map]" class="form-control" id="additional_info[location][map]" placeholder="Введите код карты участка">{{ old('additional_info[location][map]', !empty($service->additional_info->location->map) ? $service->additional_info->location->map : '') }}</textarea>
+                @error('additional_info[location][map]')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <label for="additional_info[location][near_1]">Ближайший крупный населенный пункт/метро/ЖД станция и т.п. 1</label>
+                <input name="additional_info[location][near_1]" type="text" class="form-control" id="additional_info[location][near_1]" placeholder="Введите название и расстояние" value="{{ old('additional_info[location][near_1]', !empty($service->additional_info->location->near_1) ? $service->additional_info->location->near_1 : '') }}">
+                @error('additional_info[location][near_1]')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <label for="additional_info[location][near_2]">Ближайший крупный населенный пункт/метро/ЖД станция и т.п. 2</label>
+                <input name="additional_info[location][near_2]" type="text" class="form-control" id="additional_info[location][near_2]" placeholder="Введите название и расстояние" value="{{ old('additional_info[location][near_2]', !empty($service->additional_info->location->near_2) ? $service->additional_info->location->near_2 : '') }}">
+                @error('additional_info[location][near_2]')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group col-12 col-md-6">
+                <label for="additional_info[location][near_3]">Ближайший крупный населенный пункт/метро/ЖД станция и т.п. 3</label>
+                <input name="additional_info[location][near_3]" type="text" class="form-control" id="additional_info[location][near_3]" placeholder="Введите название и расстояние" value="{{ old('additional_info[location][near_3]', !empty($service->additional_info->location->near_3) ? $service->additional_info->location->near_3 : '') }}">
+                @error('additional_info[location][near_3]')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
+        </div>
+
+        <div class="card-header">
+            <div>
                 <h3 class="card-title">Связи</h3>
             </div>
         </div>
@@ -120,23 +335,6 @@
                     @endforeach
                 </div>
                 @error('categories')
-                <small class="text-danger mt-2">{{ $message }}</small>
-                @enderror
-            </div>
-            <div class="form-group col-12 col-md-6">
-                <label for="examples">Примеры работ</label>
-                <div class="form-control pre-scrollable" style="height: 200px;">
-                    @php
-                        $service_to_examples = !empty($service) ? $service->relationship_example()->select('example_id')->get()->toArray() : [];
-                    @endphp
-                    @foreach($examples as $item)
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="examples[][example_id]" id="examples" value="{{ $item->id }}"{{ in_array(['example_id' => $item->id], old('examples', $service_to_examples)) ? ' checked' : '' }}>
-                            <label class="form-check-label" for="examples">{{ $item->name }}</label>
-                        </div>
-                    @endforeach
-                </div>
-                @error('examples')
                 <small class="text-danger mt-2">{{ $message }}</small>
                 @enderror
             </div>

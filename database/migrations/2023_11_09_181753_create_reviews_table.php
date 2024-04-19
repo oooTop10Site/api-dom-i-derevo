@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('service_categories');
             $table->string('author');
             $table->text('text');
             $table->unsignedInteger('sort_order')->default(0);

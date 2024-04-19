@@ -47,12 +47,6 @@
                                 <p>Услуги</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ route('service.example.index') }}" class="nav-link{{ request()->routeIs('service.example.*') ? ' active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Примеры работ</p>
-                            </a>
-                        </li>
                     </ul>
                 </li>
                 <li class="nav-item{{ request()->routeIs('blog.*') ? ' menu-open' : '' }}">

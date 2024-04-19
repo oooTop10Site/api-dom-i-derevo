@@ -34,7 +34,6 @@ Route::middleware('auth:web')->group(function () {
 
     Route::prefix('service')->group(function () {
         Route::resource('category', \App\Http\Controllers\Web\Service\CategoryController::class, ['as' => 'service'])->except(['show']);
-        Route::resource('example', \App\Http\Controllers\Web\Service\ExampleController::class, ['as' => 'service'])->except(['show']);
     })->name('service');
 
     Route::resource('service', \App\Http\Controllers\Web\Service\ServiceController::class)->except(['show']);
