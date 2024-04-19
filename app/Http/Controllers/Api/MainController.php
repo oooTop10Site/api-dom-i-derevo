@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Setting;
+use Illuminate\Support\Facades\Storage;
 
 class MainController extends ApiController
 {
@@ -12,7 +13,11 @@ class MainController extends ApiController
 
         if (!empty($settings)) {
             foreach ($settings as $setting) {
-                $data[$setting->code] = $setting->value;
+                if ($setting->code === 'favicon') {
+                    $data[$setting->code] = env('APP_URL') . Storage::url($setting->value);
+                } else {
+                    $data[$setting->code] = $setting->value;
+                }
             }
         }
 
