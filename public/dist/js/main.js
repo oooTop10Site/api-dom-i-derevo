@@ -22,7 +22,7 @@ function filterForm(url) {
 }
 
 function changePreviewImage(el) {
-    let imgBlock = document.getElementById('preview_image');
+    let imgBlock = el.closest('.form-group').querySelector('#preview_image');
 
     const [file] = el.files;
     if (file) {

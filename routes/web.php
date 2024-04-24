@@ -22,7 +22,7 @@ Route::controller(\App\Http\Controllers\Web\AuthController::class)->group(functi
     Route::middleware('auth:web')->get('/logout', 'logout')->name('auth.logout');
 });
 
-Route::middleware('auth:web')->group(function () {
+// Route::middleware('auth:web')->group(function () {
     Route::resource('user', \App\Http\Controllers\Web\UserController::class)->except(['show']);
     Route::resource('review', \App\Http\Controllers\Web\ReviewController::class)->except(['show']);
     Route::resource('feedback', \App\Http\Controllers\Web\FeedbackController::class)->except(['show']);
@@ -43,4 +43,4 @@ Route::middleware('auth:web')->group(function () {
         Route::get('/', 'edit')->name('main.edit');
         Route::put('/', 'update')->name('main.update');
     });
-});
+// });

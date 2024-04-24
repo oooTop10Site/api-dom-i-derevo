@@ -103,6 +103,21 @@
                 <small class="text-danger mt-2">{{ $message }}</small>
                 @enderror
             </div>
+            <div class="form-group col-12 col-md-6">
+                <div class="d-flex justify-content-between">
+                    <img id="preview_image" src="{{ !empty($data['logo']) ? Storage::url($data['logo']) : asset('storage/placeholder.webp') }}" class="rounded mr-3" style="width: 70px; height: 70px;" alt="Превью изображения">
+                    <div class="w-100">
+                        <label for="logo">Логотип</label>
+                        <div class="custom-file">
+                            <input name="data[logo]" type="file" class="custom-file-input" accept="{{ __('main.input.file.accept') }}" id="logo" onchange="changePreviewImage(this)">
+                            <label class="custom-file-label" for="logo">{{ __('main.input.file.chose') }}</label>
+                        </div>
+                    </div>
+                </div>
+                @error('data.logo')
+                <small class="text-danger mt-2">{{ $message }}</small>
+                @enderror
+            </div>
             <div class="form-group col-12">
                 <label for="politic">Блок "Политика в отношении обработки персональных данных" <strong class="text-danger">*</strong></label>
                 <textarea name="data[politic]" class="form-control" id="politic" placeholder="Введите описание для раздела">{{ old('data.politic', !empty($data['politic']) ? $data['politic'] : '') }}</textarea>

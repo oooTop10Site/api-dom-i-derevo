@@ -28,7 +28,7 @@ class MainController extends WebController
         $data = [];
         $now = Carbon::now()->toDateTimeString();
         foreach ($validated['data'] as $code => $value) {
-            if ($code === 'favicon') {
+            if ($code === 'favicon' || $code === 'logo') {
                 continue;
             } elseif (!empty($value)) {
                 $data[] = ['code' => $code, 'value' => $value, 'created_at' => $now, 'updated_at' => $now];
@@ -41,6 +41,15 @@ class MainController extends WebController
             $favicon = Setting::where('code', 'LIKE', 'favicon')->first();
             if (!empty($favicon)) {
                 $data[] = ['code' => 'favicon', 'value' => $favicon['value'], 'created_at' => $now, 'updated_at' => $now];
+            }
+        }
+
+        if (request()->hasFile('data.logo')) {
+            $data[] = ['code' => 'logo', 'value' => request()->file('data.logo')->store('public/main', ['visibility' => 'public', 'directory_visibility' => 'public']), 'created_at' => $now, 'updated_at' => $now];
+        } else {
+            $logo = Setting::where('code', 'LIKE', 'logo')->first();
+            if (!empty($logo)) {
+                $data[] = ['code' => 'logo', 'value' => $logo['value'], 'created_at' => $now, 'updated_at' => $now];
             }
         }
 

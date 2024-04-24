@@ -36,6 +36,7 @@ class MainRequest extends FormRequest
             'data.map' => ['nullable', 'string', 'min:1'],
             'data.map_link' => ['nullable', 'string', 'min:1'],
             'data.favicon' => ['nullable', 'image'],
+            'data.logo' => ['nullable', 'image'],
             'data.politic' => ['required', 'string', 'min:1'],
         ];
     }

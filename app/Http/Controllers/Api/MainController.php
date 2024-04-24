@@ -13,7 +13,7 @@ class MainController extends ApiController
 
         if (!empty($settings)) {
             foreach ($settings as $setting) {
-                if ($setting->code === 'favicon') {
+                if ($setting->code === 'favicon' || $setting->code === 'logo') {
                     $data[$setting->code] = env('APP_URL') . Storage::url($setting->value);
                 } else {
                     $data[$setting->code] = $setting->value;
