@@ -11,6 +11,8 @@ class ServiceController extends ApiController
         $service = Service::where(function ($query) use ($seo_keyword){
             $query->where('seo_keyword', 'LIKE', $seo_keyword);
             $query->where('status', true);
+        })->with('images', function ($query) {
+            $query->orderBy('sort_order', 'ASC');
         })->first();
 
         if (!empty($service)) {

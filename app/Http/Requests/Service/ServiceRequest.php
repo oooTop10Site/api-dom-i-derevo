@@ -36,6 +36,10 @@ class ServiceRequest extends FormRequest
             'description' => ['nullable', 'min:1'],
             'preview' => ['nullable', 'min:1', 'max:255'],
 
+            'images' => ['nullable', 'array'],
+            'images.*.image' => ['nullable', 'image'],
+            'images.*.sort_order' => ['required', 'integer', 'min:0'],
+
             'additional_info' => ['nullable', 'array'],
             'additional_info.house' => ['nullable', 'array'],
             'additional_info.house.*' => ['nullable', 'string', 'min:1'],

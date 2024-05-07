@@ -65,4 +65,12 @@ class Service extends Model
     public function relationship_additional_service() {
         return $this->hasMany(ServiceToService::class, 'additional_service_id');
     }
+
+    public function relationship_image() {
+        return $this->hasMany(ServiceImage::class, 'service_id');
+    }
+
+    public function images() {
+        return $this->hasMany(ServiceImage::class, 'service_id');
+    }
 }

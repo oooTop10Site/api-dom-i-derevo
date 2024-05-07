@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web\Service;
 use App\Http\Controllers\Web\WebController;
 use App\Http\Requests\Service\ServiceRequest;
 use App\Models\Service\Service;
+use App\Models\Service\ServiceImage;
 use Illuminate\Support\Facades\Storage;
 
 class ServiceController extends WebController
@@ -57,6 +58,20 @@ class ServiceController extends WebController
         if (!empty($validated['services']) && count($validated['services']) > 0) {
             $service->relationship_service()->createMany($validated['services']);
         }
+        if (!empty(request()->file('images')) && count(request()->file('images')) > 0) {
+            $validated['images'] = [];
+
+            foreach (request()->file('images') as $key => $image) {
+                if (!empty($image['image'])) {
+                    $validated['images'][] = [
+                        'image' => $image['image']->store('public/service/' . $service->id, ['visibility' => 'public', 'directory_visibility' => 'public']),
+                        'sort_order' => request('images.' . $key . '.sort_order', 0),
+                    ];
+                }
+            }
+
+            $service->relationship_image()->createMany($validated['images']);
+        }
 
         return redirect(route('service.index', $_GET))->with('success', __('main.alert.store'));
     }
@@ -64,11 +79,12 @@ class ServiceController extends WebController
     public function edit(Service $service) {
         $categories = $this->get_parents();
         $services = Service::where('id', '!=', $service->id)->get();
+        $images = ServiceImage::where('service_id', $service->id)->get();
 
         $service->price = json_decode($service->price);
         $service->additional_info = json_decode($service->additional_info);
 
-        return view('service.form', compact('service', 'categories', 'services'));
+        return view('service.form', compact('service', 'categories', 'services', 'images'));
     }
 
     public function update(ServiceRequest $request, Service $service) {
@@ -96,6 +112,25 @@ class ServiceController extends WebController
             $service->relationship_service()->delete();
             $service->relationship_service()->createMany($validated['services']);
         }
+        if (!empty(request()->file('images')) && count(request()->file('images')) > 0) {
+            foreach ($service->relationship_image()->get() as $image) {
+                Storage::delete($image->image);
+            }
+            $service->relationship_image()->delete();
+
+            $validated['images'] = [];
+
+            foreach (request()->file('images') as $key => $image) {
+                if (!empty($image['image'])) {
+                    $validated['images'][] = [
+                        'image' => $image['image']->store('public/service/' . $service->id, ['visibility' => 'public', 'directory_visibility' => 'public']),
+                        'sort_order' => request('images.' . $key . '.sort_order', 0),
+                    ];
+                }
+            }
+
+            $service->relationship_image()->createMany($validated['images']);
+        }
 
         return redirect(route('service.index', $_GET))->with('success', __('main.alert.update'));
     }
@@ -107,6 +142,12 @@ class ServiceController extends WebController
 
         $service->relationship_category()->delete();
         $service->relationship_service()->delete();
+
+        foreach ($service->relationship_service()->get() as $image) {
+            Storage::delete($image->image);
+        }
+        $service->relationship_image()->delete();
+
         $service->delete();
 
         return redirect(route('service.index', $_GET))->with('success', __('main.alert.destroy'));
