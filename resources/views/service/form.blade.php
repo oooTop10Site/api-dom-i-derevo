@@ -155,8 +155,13 @@
                         <label for="images[{{ $key }}][sort_order]">Порядок сортировки <strong class="text-danger">*</strong></label>
                         <input name="images[{{ $key }}][sort_order]" min="0" step="1" type="number" class="form-control" id="images[{{ $key }}][sort_order]" placeholder="Введите порядок сортировки" value="{{ old('images.' . $key . '.sort_order', !empty($image->sort_order) ? $image->sort_order : 0) }}">
                     </div>
-                    <div class="form-group col-12 col-md-2 d-flex align-items-end" id="images-{{ $key }}">
+                    {{-- <div class="form-group col-12 col-md-2 d-flex align-items-end" id="images-{{ $key }}">
                         <button type="button" class="btn btn-danger" onclick="deleteImageInput('images-{{ $key }}')"><i class="fas fa-trash"></i></button>
+                    </div> --}}
+                    <div class="form-group col-12 col-md-2 d-flex align-items-end" id="images-{{ $key }}">
+                        <!-- Checkbox для выбора изображения на удаление -->
+                        <input type="checkbox" name="images_for_delete[]" value="{{ $image->id }}" id="delete-image-{{ $key }}"> Удалить
+                        <label for="delete-image-{{ $key }}"></label>
                     </div>
                 @endforeach
             @endif

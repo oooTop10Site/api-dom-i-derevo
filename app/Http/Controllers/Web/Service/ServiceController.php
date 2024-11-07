@@ -133,13 +133,7 @@ class ServiceController extends WebController
             $service->relationship_service()->createMany($validated['services']);
         }
         if (!empty(request()->file('images')) && count(request()->file('images')) > 0) {
-            foreach ($service->relationship_image()->get() as $image) {
-                Storage::delete($image->image);
-            }
-            $service->relationship_image()->delete();
-
             $validated['images'] = [];
-
             foreach (request()->file('images') as $key => $image) {
                 if (!empty($image['image'])) {
                     $validated['images'][] = [
@@ -148,8 +142,23 @@ class ServiceController extends WebController
                     ];
                 }
             }
-
             $service->relationship_image()->createMany($validated['images']);
+        }
+
+        $imagesToDelete = $request->input('images_for_delete', []);
+
+        if (!empty($imagesToDelete)) {
+            // Обрабатываем удаление изображений
+            foreach ($imagesToDelete as $imageId) {
+                // Логика удаления изображения
+                $image = ServiceImage::find($imageId);
+                if ($image) {
+                    // Пример удаления файла (если нужно)
+                    Storage::delete($image->image);
+                    // Удаляем запись из базы данных
+                    $image->delete();
+                }
+            }
         }
 
         // Удаление отмеченных для удаления изображений
