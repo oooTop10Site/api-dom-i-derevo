@@ -6,6 +6,7 @@ use App\Http\Controllers\Web\WebController;
 use App\Http\Requests\Service\ServiceRequest;
 use App\Models\Service\Service;
 use App\Models\Service\ServiceImage;
+use App\Models\Service\Video;
 use Illuminate\Support\Facades\Storage;
 
 class ServiceController extends WebController
@@ -41,6 +42,7 @@ class ServiceController extends WebController
 
     public function store(ServiceRequest $request) {
         $validated = $request->validated();
+        
 
         if (request()->hasFile('image')) {
             $validated['image'] = request()->file('image')->store('public/service', ['visibility' => 'public', 'directory_visibility' => 'public']);
@@ -73,6 +75,20 @@ class ServiceController extends WebController
             $service->relationship_image()->createMany($validated['images']);
         }
 
+        if ($request->hasFile('videos')) {
+            foreach ($request->file('videos') as $videoFile) {
+                // Сохраняем видео файл
+                $path = $videoFile->store('images', 'public'); 
+
+                $video = Video::create([
+                    'path' => $path,
+                    // 'service_id' => $service->id, 
+                ]);
+
+                $service->videos()->attach($video->id);
+            }
+        }
+
         return redirect(route('service.index', $_GET))->with('success', __('main.alert.store'));
     }
 
@@ -89,6 +105,10 @@ class ServiceController extends WebController
 
     public function update(ServiceRequest $request, Service $service) {
         $validated = $request->validated();
+        // dd($request->all());
+
+        // dd($validated);
+        
 
         if (request()->hasFile('image')) {
             if (!empty($article->image)) {
@@ -132,6 +152,26 @@ class ServiceController extends WebController
             $service->relationship_image()->createMany($validated['images']);
         }
 
+        // Удаление отмеченных для удаления изображений
+        if ($request->has('delete_videos')) {              
+            $videosToDelete = Video::whereIn('id', $request->delete_videos)->get(); 
+            foreach ($videosToDelete as $video) {
+                Storage::disk('public')->delete($video->path); // Удаляем файл из файловой системы
+                $video->delete();                               // Удаляем запись из базы данных
+            }
+        }
+
+        // Добавление новых изображений
+        if ($request->hasFile('videos')) {
+            foreach ($request->file('videos') as $videoFile) {
+                #dd("test1");
+                $path = $videoFile->store('video', 'public'); // Сохраняем файл в публичное хранилище
+                $video = Video::create(['path' => $path]);      // Создаем запись в таблице images
+                $service->videos()->attach($video->id);            // Привязываем изображение к плану через промежуточную таблицу
+            }
+        }
+        
+        
         return redirect(route('service.index', $_GET))->with('success', __('main.alert.update'));
     }
 
@@ -148,6 +188,12 @@ class ServiceController extends WebController
         }
         $service->relationship_image()->delete();
 
+        if($service->videos){
+            foreach ($service->videos as $video) {
+                Storage::disk('public')->delete($video->path);
+                $video->delete();
+            }
+        }
         $service->delete();
 
         return redirect(route('service.index', $_GET))->with('success', __('main.alert.destroy'));

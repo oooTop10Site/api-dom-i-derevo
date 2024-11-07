@@ -17,6 +17,8 @@
 @endsection
 
 @section('content')
+
+    
     <form class="card card-default" action="{{ request()->routeIs('*.create') ? route('service.store', $_GET) : route('service.update', array_merge(['service' => $service->id], $_GET)) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @if(request()->routeIs('*.edit'))
@@ -35,6 +37,15 @@
                 </div>
             </div>
         </div>
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
 
         <div class="card-body row">
             <div class="form-group col-12 col-md-6">
@@ -516,6 +527,31 @@
                 @enderror
             </div>
         </div>
+
+        <div class="form-group col-12 col-md-6">
+            <label for="videos">Видеозаписи <strong class="text-danger"></strong></label>
+            <input name="videos[]" type="file" class="form-control" id="videos" multiple>
+            @error('videos')
+            <small class="text-danger mt-2">{{ $message }}</small>
+            @enderror
+        </div>
+
+        @if(isset($service) && $service->videos->isNotEmpty())
+            <div class="form-group">
+                <label>Видеозаписи на данный момент</label>
+                <div class="d-flex flex-wrap">
+                    @foreach($service->videos as $video)
+                        <div class="m-2 position-relative">
+                            <video controls width="320" height="240">
+                                <source src="{{ asset('storage/' . $video->path) }}" type="video/mp4">
+                                Ваш браузер не поддерживает тег video.
+                            </video>
+                            <input type="checkbox" name="delete_videos[]" value="{{ $video->id }}"> Удалить
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        @endif
     </form>
 @endsection
 

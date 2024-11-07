@@ -79,6 +79,24 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('service.index') }}" class="nav-link{{ request()->routeIs('service.*') ? ' active' : '' }}">
+                        <i class="nav-icon fas fa-pen-nib"></i>
+                        <p>Услуги</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('option.index') }}" class="nav-link{{ request()->routeIs('option.*') ? ' active' : '' }}">
+                        <i class="nav-icon fas fa-pen-nib"></i>
+                        <p>Комплектации</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('plan.index') }}" class="nav-link{{ request()->routeIs('plan.*') ? ' active' : '' }}">
+                        <i class="nav-icon fas fa-pen-nib"></i>
+                        <p>Планировки</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('information.index') }}" class="nav-link{{ request()->routeIs('information.*') ? ' active' : '' }}">
                         <i class="nav-icon fas fa-file-alt"></i>
                         <p>Информационные страницы</p>

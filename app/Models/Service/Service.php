@@ -2,6 +2,7 @@
 
 namespace App\Models\Service;
 
+use App\Models\Option;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
@@ -73,4 +74,14 @@ class Service extends Model
     public function images() {
         return $this->hasMany(ServiceImage::class, 'service_id');
     }
+
+    public function options(){
+        return $this->belongsToMany(Option::class, 'service_to_options');
+    }
+
+    public function videos() {
+        return $this->belongsToMany(Video::class, 'service_videos');
+    }
+
+
 }

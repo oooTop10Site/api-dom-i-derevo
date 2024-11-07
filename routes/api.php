@@ -34,6 +34,11 @@ Route::prefix('review')->controller(\App\Http\Controllers\Api\ReviewController::
     Route::post('/store', 'store')->name('api.review.store');
 });
 
+
+Route::apiResource('option', \App\Http\Controllers\Api\OptionController::class);
+Route::apiResource('plan', \App\Http\Controllers\Api\PlanController::class);
+
+
 Route::prefix('blog')->group(function () {
     Route::prefix('category')->controller(\App\Http\Controllers\Api\Blog\CategoryController::class)->group(function () {
         Route::get('/', 'index')->name('api.blog.category.index');

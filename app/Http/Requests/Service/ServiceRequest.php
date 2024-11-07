@@ -58,6 +58,13 @@ class ServiceRequest extends FormRequest
             'meta_description' => ['nullable', 'string', 'min:1', 'max:255'],
             'meta_keywords' => ['nullable', 'string', 'min:1', 'max:255'],
             'seo_keyword' => ['nullable', 'string', 'min:1', 'max:255', Rule::unique('services', 'seo_keyword')->ignore($this->route('service.id'))],
+
+           
+            'videos' => 'nullable|array',  // Проверка на массив
+            'videos.*' => 'mimes:mp4,avi,mov,mkv|max:10240',  // Максимум 10MB для каждого файла
+
+            'delete_videos' => 'nullable|array',
+            'delete_videos.*' => 'integer|exists:videos,id', 
         ];
     }
 }
