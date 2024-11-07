@@ -78,12 +78,12 @@
                         <p>Отзывы</p>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{ route('service.index') }}" class="nav-link{{ request()->routeIs('service.*') ? ' active' : '' }}">
                         <i class="nav-icon fas fa-pen-nib"></i>
                         <p>Услуги</p>
                     </a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a href="{{ route('option.index') }}" class="nav-link{{ request()->routeIs('option.*') ? ' active' : '' }}">
                         <i class="nav-icon fas fa-pen-nib"></i>

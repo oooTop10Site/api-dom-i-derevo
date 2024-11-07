@@ -32,7 +32,7 @@ class PlanController extends Controller
             foreach ($request->file('images') as $imageFile) {
                 // Сохраняем файл и добавляем запись в базу данных
                 $path = $imageFile->store('images', 'public');
-                $image = Image::create(['path' => $path]);
+                $image = Image::create(['url' => $path]);
                 $plan->images()->attach($image->id);
             }
         }
