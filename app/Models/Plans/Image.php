@@ -10,6 +10,8 @@ class Image extends Model
     use HasFactory;
     protected $fillable = [
         'url',
+        'sort_order',
+        'show_in_index'
     ];
 
     public function plans(){

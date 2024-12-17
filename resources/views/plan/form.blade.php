@@ -49,17 +49,42 @@
             </div>
 
             @if(isset($plan) && $plan->images->isNotEmpty())
-                <div class="form-group">
+                <div class="form-group col-12">
                     <label>Изображения на данный момент</label>
-                    <div class="d-flex flex-wrap">
-                        @foreach($plan->images as $image)
-                            <div class="m-2 position-relative">
+                    
+                    @foreach($plan->images as $image)
+                        <div class="d-flex justify-content-around flex-wrap mt-2">
+            
+                            <div>
                                 <img src="{{ asset('storage/' . $image->url) }}" alt="image" style="width: 100px; height: auto;">
-                                <!-- Кнопка для удаления изображения -->
+                            </div>
+                
+                            <div>
+                                <input 
+                                    name="sort_order[{{ $image->id }}]" 
+                                    type="number" 
+                                    class="form-control" 
+                                    id="sort_order" 
+                                    placeholder="12" 
+                                    value="{{ $image->sort_order }}">    
+                            </div>
+                            
+                            <div>
+                                <input 
+                                    type="checkbox" 
+                                    name="show_in_index[]" 
+                                    value="{{ $image->id }}" 
+                                    {{ $image->show_in_index ? 'checked' : '' }}> Показывать на главной
+                            </div>
+                
+                            <div>
                                 <input type="checkbox" name="delete_images[]" value="{{ $image->id }}"> Удалить
                             </div>
-                        @endforeach
-                    </div>
+                           
+                        </div>
+                        <hr>
+                    @endforeach
+                    
                 </div>
             @endif
         </div>

@@ -13,4 +13,10 @@ class PlanImage extends Model
         'plan_id',
         'image_id'
     ];
+
+    // Добавляем связь с моделью Image
+    public function image()
+    {
+        return $this->belongsTo(Image::class);
+    }
 }

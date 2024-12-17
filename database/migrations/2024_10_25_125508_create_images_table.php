@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('images', function (Blueprint $table) {
             $table->id();
             $table->string('url');
+            $table->unsignedInteger('sort_order')->default(0);
+            $table->boolean('show_in_index')->nullable();
+            $table->boolean('is_plan')->nullable();
             $table->timestamps();
         });
     }
